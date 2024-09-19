@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questionnaire FH</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header header__start">
+      <div class="header__main">
+        <button class="header__back">
+          <svg viewBox="0 0 24 24" focusable="false">
+            <path
+              fill="#000"
+              d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
+            ></path>
+          </svg>
+        </button>
+        <img src="./img/logo.svg" alt="" class="header__logo" />
+      </div>
+      <div class="header__line">
+        <div class="header__progress"></div>
+      </div>
+    </header>
+    <section class="content">
+      <div class="content__container">
+        <div class="content__step content__step-1">
+          <h2 class="content__step-title">
+            How long have you been suffering from hemorrhoids?
+          </h2>
+          <div class="content__step-wrap">
+            <button class="content__step-button">Less than a year</button>
+            <button class="content__step-button">1 to 5 years</button>
+            <button class="content__step-button">5 to 10 years</button>
+            <button class="content__step-button">10 to 15 years</button>
+            <button class="content__step-button">More than 15 years</button>
+          </div>
+        </div>
+        <div class="content__step content__step-2 hidden">
+          <h2 class="content__step-title">
+            What are your suffering the most from with hemorrhoids?
+          </h2>
+          <div class="content__step-wrap">
+            <button data-value="pain" class="content__step-button">Pain</button>
+            <button data-value="itching" class="content__step-button">
+              Itching
+            </button>
+            <button data-value="swelling" class="content__step-button">
+              Swelling
+            </button>
+            <button data-value="bleeding" class="content__step-button">
+              Bleeding
+            </button>
+          </div>
+        </div>
+
+        <div class="content__step content__step-3 hidden">
+          <h2 class="content__step-title">How old are you?</h2>
+          <div class="content__step-wrap">
+            <button class="content__step-button">Under 20 years old</button>
+            <button class="content__step-button">Between 20 and 30</button>
+            <button class="content__step-button">Between 30 and 40</button>
+            <button class="content__step-button">Between 40 and 50</button>
+            <button class="content__step-button">Between 50 and 60</button>
+            <button class="content__step-button">Over 60 years old</button>
+          </div>
+        </div>
+        <div class="content__step content__step-4 hidden">
+          <h2 class="content__step-title">What is your gender?</h2>
+          <h3 class="content__step-subtitle">
+            Gender and hormones influence the metabolism.
+          </h3>
+          <div class="content__step-wrap">
+            <button class="content__step-button content__step-button-half">
+              Male
+              <img
+                class="content__step-button-img"
+                src="./img/male.svg"
+                alt="Image"
+              />
+            </button>
+            <button class="content__step-button content__step-button-half">
+              Female
+              <img
+                class="content__step-button-img"
+                src="./img/female.svg"
+                alt="Image"
+              />
+            </button>
+          </div>
+        </div>
+        <div class="content__step content__step-5 hidden">
+          <div class="content__step-story">
+            <h2 class="content__step-story-title">Formule H Success Story</h2>
+            <h3 class="content__step-story-subtitle">
+              Already more than 20,000 success stories!
+            </h3>
+            <img
+              class="content__step-story-img"
+              src="./img/story.jpg"
+              alt="Image"
+            />
+            <div class="content__step-story-text">
+              Formule H® is safe to use. No wonder Formule H® is one of the most
+              popular hemorroids products in France in 2024.
+            </div>
+          </div>
+          <button class="content__step-button">Next</button>
+        </div>
+        <div
+          data-step="pain"
+          class="content__step content__step-6 content__step-6-pain hidden"
+        >
+          <h2 class="content__step-title">
+            How much pain do your hemorrhoids provoke?
+          </h2>
+          <div class="content__step-wrap">
+            <button class="content__step-button">Mild pain</button>
+            <button class="content__step-button">Moderate pain</button>
+            <button class="content__step-button">Severe pain</button>
+            <button class="content__step-button">Excruciating pain</button>
+          </div>
+        </div>
+
+        <div
+          data-step="itching"
+          class="content__step content__step-6 content__step-6-itching hidden"
+        >
+          <h2 class="content__step-title">
+            How often are your hemorrhoids itching?
+          </h2>
+          <div class="content__step-wrap">
+            <button class="content__step-button">A few times a day</button>
+            <button class="content__step-button">Several times a day</button>
+            <button class="content__step-button">Almost all day long</button>
+            <button class="content__step-button">Days and nights</button>
+          </div>
+        </div>
+
+        <div
+          data-step="swelling"
+          class="content__step content__step-6 content__step-6-swelling hidden"
+        >
+          <h2 class="content__step-title">How big are your hemorrhoids?</h2>
+          <div class="content__step-wrap">
+            <button class="content__step-button">The size of a pea</button>
+            <button class="content__step-button">The size of a cherry</button>
+            <button class="content__step-button">The size of a prune</button>
+          </div>
+        </div>
+
+        <div
+          data-step="bleeding"
+          class="content__step content__step-6 content__step-6-bleeding hidden"
+        >
+          <h2 class="content__step-title">
+            How often are your hemorrhoids bleeding?
+          </h2>
+          <div class="content__step-wrap">
+            <button class="content__step-button">
+              Sometimes after going to the toilet
+            </button>
+            <button class="content__step-button">
+              Every time after going to the toilet
+            </button>
+            <button class="content__step-button">
+              After going to the toilet and randomly during the day too
+            </button>
+          </div>
+        </div>
+
+        <div class="content__step content__step-7 hidden">
+          <h2 class="content__step-title-h3">
+            Creams and suppositories help alleviate the symptoms. But they can't
+            target the root cause of hemorrhoids from outside. To cure your
+            hemorroids, you need to reduce inflammation and strenghten the veins
+            from within.
+          </h2>
+          <img class="content__step-graph" src="./img/graph.svg" alt="Image" />
+          <div class="content__step-wrap">
+            <button class="content__step-button">Next</button>
+          </div>
+        </div>
+        <div class="content__step content__step-loader hidden">
+          <h4 class="content__step-loader-title">
+            Your answers are being analyzed...
+          </h4>
+          <div class="content__step-loader-progress"></div>
+        </div>
+        <div class="content__step content__step-last hidden">
+          <h2 class="content__step-title-h3">End</h2>
+
+          <div class="content__step-wrap">
+            <button class="content__step-button">Next</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="./script.js"></script>
+  </body>
+</html>
