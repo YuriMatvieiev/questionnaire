@@ -188,6 +188,11 @@ html {
         padding: 8px 20px;
       }
     }
+    &.content__step-last {
+      .content__step-title {
+        margin-bottom: 20px;
+      }
+    }
   }
 
   // .content__step-1
@@ -203,6 +208,13 @@ html {
       text-align: left;
       font-weight: 700;
       line-height: 1.2;
+    }
+    &-h4 {
+      font-size: 16px;
+      text-align: center;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 8px;
     }
   }
   &__step-subtitle {
@@ -309,9 +321,13 @@ html {
       opacity: 1;
       -webkit-transform-origin: 100% 0%;
       transform-origin: 100% 0%;
-      -webkit-animation: loader 5s ease-in-out infinite;
-      animation: loader 5s ease-in-out infinite;
+      -webkit-animation: loader 3s ease-in-out infinite;
+      animation: loader 3s ease-in-out infinite;
     }
+  }
+  &__step-last-graph {
+    width: 100%;
+    margin-bottom: 40px;
   }
 }
 
@@ -342,3 +358,185 @@ html {
 }
 
 //========================================================================================================================================================
+
+.content {
+  // .content__offer
+  &__offer {
+    background: #e6ecce;
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  // .content__offer-logo
+  &__offer-logo {
+    height: 40px;
+    margin-bottom: 12px;
+  }
+  // .content__offer-title
+  &__offer-title {
+    font-size: 36px;
+    line-height: 1.5;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  &__offer-product {
+    max-width: 312px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  // .content__offer-subtitle
+  &__offer-subtitle {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+  // .content__offer-list
+  &__offer-list {
+    margin-bottom: 20px;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      &::before {
+        content: "✓";
+        color: $green;
+      }
+      &:not(:last-child) {
+        margin-bottom: 12px;
+      }
+    }
+  }
+  // .content__offer-price
+  &__offer-price {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  // .content__offer-price-text
+  &__offer-price-text {
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+  // .content__offer-price-full
+  &__offer-price-full {
+    font-size: 14px;
+  }
+  &__offer-reviews {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 30px;
+    line-height: 1.5;
+  }
+  &__offer-reviews-number {
+    text-align: center;
+    font-size: 60px;
+    line-height: 1.5;
+  }
+}
+.orange-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  appearance: none;
+  outline: none;
+  line-height: 1.2;
+  border-radius: 6px;
+  font-weight: 600;
+  padding: 18px;
+  color: #fff;
+  font-size: 16px;
+  background: #eb731a;
+  transition: background 0.3s;
+  width: 50%;
+  margin: 0 auto;
+  @media (any-hover: hover) {
+    &:hover {
+      background: #88c862;
+    }
+  }
+}
+
+//========================================================================================================================================================
+
+.content {
+  // .content__offer-testimonials
+  &__offer-testimonials {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  // .content__offer-testimonials-item
+  &__offer-testimonials-item {
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 20px;
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+  // .content__offer-testimonials-header
+  &__offer-testimonials-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  // .content__offer-testimonials-left
+  &__offer-testimonials-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  // .content__offer-testimonials-name
+  &__offer-testimonials-name {
+    font-weight: 700;
+    font-style: 16px;
+  }
+  // .content__offer-testimonials-stars
+  &__offer-testimonials-stars {
+  }
+  // .content__offer-testimonials-right
+  &__offer-testimonials-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }
+  // .content__offer-testimonials-data
+  &__offer-testimonials-data {
+    display: flex;
+    gap: 4px;
+    font-size: 14px;
+  }
+  // .content__offer-testimonials-dynamic
+  &__offer-testimonials-dynamic {
+  }
+  // .content__offer-testimonials-verified
+  &__offer-testimonials-verified {
+    font-size: 12px;
+    color: #22543d;
+    background: #c6f6d5;
+    font-weight: 700;
+    border-radius: 2px;
+    text-transform: uppercase;
+    padding: 0 4px;
+  }
+  // .content__offer-testimonials-text
+  &__offer-testimonials-text {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e2e8f0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  &__offer-testimonials-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    svg {
+      width: 12px;
+      height: 16px;
+    }
+  }
+}

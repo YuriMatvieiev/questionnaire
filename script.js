@@ -1,50 +1,59 @@
 document.addEventListener("DOMContentLoaded", function () {
   let currentStep = 1; // Current step
-  let selectedIssue = ""; // Storing the selection from the second step
+  let totalSteps = 8; // Total number of steps (including all steps)
+  let selectedIssue = ""; // To save the selection from the second step
 
   // All steps
   const steps = document.querySelectorAll(".content__step");
   const backButton = document.querySelector(".header__back");
   const nextButtons = document.querySelectorAll(".content__step-button");
   const header = document.querySelector(".header");
+  const progressBar = document.querySelector(".header__progress");
 
-  // Show the current step
+  // Function to update the progress bar
+  function updateProgress() {
+    const progressPercent = (currentStep / totalSteps) * 100;
+    progressBar.style.width = `${progressPercent}%`;
+  }
+
+  // Function to show the current step
   function showStep(step) {
     steps.forEach((stepElem) => {
       stepElem.classList.add("hidden");
     });
     document.querySelector(`.content__step-${step}`).classList.remove("hidden");
 
-    // Add the header__start class if it is the first step
+    // Add the header__start class if this is the first step
     if (step === 1) {
       header.classList.add("header__start");
     } else {
       header.classList.remove("header__start");
     }
+
+    // Update progress
+    updateProgress();
   }
 
-  // Handle button clicks
+  // Button click handling
   nextButtons.forEach((button) => {
     button.addEventListener("click", function () {
-      // Check if we are on the last step
-      if (currentStep === 8) {
-        // Do nothing if we are on the last step
+      // Do nothing if on the last step
+      if (currentStep === totalSteps) {
         return;
       }
 
-      // If we are on the second step, save the selection
+      // If it's the second step, save the selection
       if (currentStep === 2) {
         selectedIssue = this.getAttribute("data-value");
       }
 
-      // If we are on step 5 and need to move to step 6, show the corresponding block
+      // If it's the fifth step, move to the sixth, according to the selection
       if (currentStep === 5) {
-        // Hide the current step 5
         document
           .querySelector(`.content__step-${currentStep}`)
           .classList.add("hidden");
 
-        // First, hide all blocks of step 6
+        // Hide all blocks of step 6
         document.querySelectorAll(".content__step-6").forEach((step) => {
           step.classList.add("hidden");
         });
@@ -57,19 +66,19 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         currentStep = 6;
+        updateProgress();
         return;
       }
 
-      // If clicking on step 6, move to step 7
+      // Transition from step 6 to 7
       if (currentStep === 6) {
         currentStep = 7;
         showStep(currentStep);
         return;
       }
 
-      // If clicking on step 7
+      // Transition from step 7
       if (currentStep === 7) {
-        // Hide step 7
         document.querySelector(".content__step-7").classList.add("hidden");
 
         // Show loader for 7 seconds
@@ -77,15 +86,15 @@ document.addEventListener("DOMContentLoaded", function () {
           .querySelector(".content__step-loader")
           .classList.remove("hidden");
         setTimeout(function () {
-          // After 7 seconds, hide the loader and show the final step
           document
             .querySelector(".content__step-loader")
             .classList.add("hidden");
           document
             .querySelector(".content__step-last")
             .classList.remove("hidden");
-        }, 5000); // 7000 milliseconds = 7 seconds
+        }, 3000); // 3000 ms = 3 seconds (it was 7000 ms = 7 seconds)
         currentStep = 8;
+        updateProgress();
         return;
       }
 
@@ -95,23 +104,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Handle the back button
+  // Handling the "Back" button
   backButton.addEventListener("click", function () {
     if (currentStep > 1) {
-      // If we are on step 6, go back to step 5
       if (currentStep === 6) {
         currentStep = 5;
         showStep(currentStep);
       } else if (currentStep === 7) {
-        // If we are on step 7 and click "back", go back to step 6
         currentStep = 6;
+        updateProgress();
+
         document.querySelector(`.content__step-7`).classList.add("hidden");
-        // First, hide all blocks of step 6
         document.querySelectorAll(".content__step-6").forEach((step) => {
           step.classList.add("hidden");
         });
 
-        // Show the corresponding block for the selected issue (pain, itching, swelling, bleeding)
         if (selectedIssue) {
           document
             .querySelector(`[data-step="${selectedIssue}"]`)
@@ -122,6 +129,89 @@ document.addEventListener("DOMContentLoaded", function () {
         showStep(currentStep);
       }
     }
+  });
+
+  const testimonialDates = document.querySelectorAll(
+    ".content__offer-testimonials-dynamic"
+  );
+
+  // Function to format the date in DD.MM.YYYY format
+  function formatDate(date) {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  }
+
+  // Get today's date
+  let currentDate = new Date();
+
+  // Initial index for the testimonial counter
+  let commentIndex = 0;
+
+  // Loop through all testimonials and assign them dates
+  while (commentIndex < testimonialDates.length) {
+    // Random number of comments for the same date (from 2 to 4)
+    const commentsForSameDay = Math.floor(Math.random() * 3) + 2; // from 2 to 4
+
+    // Assign the same date for each comment
+    for (let i = 0; i < commentsForSameDay; i++) {
+      if (commentIndex < testimonialDates.length) {
+        testimonialDates[commentIndex].textContent = formatDate(currentDate);
+        commentIndex++;
+      }
+    }
+
+    // Reduce the date by 1 day for the next cycle
+    currentDate.setDate(currentDate.getDate() - 1);
+  }
+
+  // Select all the elements that should contain stars
+  const starContainers = document.querySelectorAll(
+    ".content__offer-testimonials-stars"
+  );
+
+  // SVG star templates
+  const filledStar = `
+      <svg viewBox="0 0 24 24">
+        <path
+          fill="#D69E2E"
+          d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"
+        ></path>
+      </svg>
+    `;
+
+  const emptyStar = `
+      <svg viewBox="0 0 24 24">
+        <path
+          fill="#CBD5E0"
+          d="M23.555,8.729a1.505,1.505,0,0,0-1.406-.98H16.062a.5.5,0,0,1-.472-.334L13.405,1.222a1.5,1.5,0,0,0-2.81,0l-.005.016L8.41,7.415a.5.5,0,0,1-.471.334H1.85A1.5,1.5,0,0,0,.887,10.4l5.184,4.3a.5.5,0,0,1,.155.543L4.048,21.774a1.5,1.5,0,0,0,2.31,1.684l5.346-3.92a.5.5,0,0,1,.591,0l5.344,3.919a1.5,1.5,0,0,0,2.312-1.683l-2.178-6.535a.5.5,0,0,1,.155-.543l5.194-4.306A1.5,1.5,0,0,0,23.555,8.729Z"
+        ></path>
+      </svg>
+    `;
+
+  // Function to generate stars
+  function generateStars(starCount) {
+    let starHTML = "<ul class='content__offer-testimonials-stars'>";
+
+    // Loop through to generate filled stars
+    for (let i = 0; i < starCount; i++) {
+      starHTML += `<li>${filledStar}</li>`;
+    }
+
+    // Loop through to generate empty stars (5 - starCount)
+    for (let i = starCount; i < 5; i++) {
+      starHTML += `<li>${emptyStar}</li>`;
+    }
+
+    starHTML += "</ul>";
+    return starHTML;
+  }
+
+  // Go through all star containers and insert the correct number of stars
+  starContainers.forEach((container) => {
+    const starCount = parseInt(container.getAttribute("data-stars"), 10);
+    container.innerHTML = generateStars(starCount);
   });
 
   // Initially show the first step
