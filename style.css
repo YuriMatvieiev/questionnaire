@@ -184,6 +184,12 @@ html {
   font-weight: 700;
   text-align: center;
 }
+@media (max-width: 768.98px) {
+  .content__step-title {
+    font-size: 22px;
+    line-height: 1.33;
+  }
+}
 .content__step-title-h3 {
   font-size: 20px;
   text-align: left;
@@ -227,7 +233,7 @@ html {
   line-height: 1.2;
   border-radius: 6px;
   font-weight: 600;
-  padding: 32px;
+  padding: 22px;
   color: #fff;
   font-size: 16px;
   background: #498a36;
@@ -312,6 +318,11 @@ html {
   width: 100%;
   margin-bottom: 40px;
 }
+@media (max-width: 768.98px) {
+  .content__step-last-graph {
+    margin-bottom: 20px;
+  }
+}
 
 .hidden {
   display: none;
@@ -341,6 +352,11 @@ html {
   border-radius: 6px;
   text-align: center;
   margin-bottom: 20px;
+}
+@media (max-width: 768.98px) {
+  .content__offer {
+    padding: 20px 10px;
+  }
 }
 .content__offer-logo {
   height: 40px;
@@ -438,6 +454,11 @@ html {
 @media (any-hover: hover) {
   .orange-button:hover {
     background: #88c862;
+  }
+}
+@media (max-width: 499.98px) {
+  .orange-button {
+    width: 100%;
   }
 }
 
