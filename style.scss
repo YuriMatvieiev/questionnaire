@@ -198,7 +198,10 @@ html {
   }
 
   // .content__step-1
-  &__step-1 {
+  &__step-5 {
+    @media (max-width: $mobile) {
+      margin-top: -20px;
+    }
   }
   &__step-title {
     line-height: 1.2;
@@ -277,6 +280,9 @@ html {
     text-align: center;
     line-height: 1.5;
     margin-bottom: 20px;
+    @media (max-width: $mobile) {
+      margin-bottom: 10px;
+    }
   }
   // .content__step-story-title
   &__step-story-title {
@@ -291,6 +297,9 @@ html {
     font-weight: 700;
     padding: 12px;
     font-size: 16px;
+    @media (max-width: $mobile) {
+      padding: 6px 12px;
+    }
   }
   // .content__step-story-img
   &__step-story-img {
@@ -299,6 +308,9 @@ html {
   &__step-story-text {
     padding: 8px;
     font-size: 16px;
+    @media (max-width: $mobile) {
+      padding: 8px;
+    }
   }
   &__step-graph {
     width: 100%;
@@ -387,7 +399,7 @@ html {
   }
   // .content__offer-title
   &__offer-title {
-    font-size: 36px;
+    font-size: 30px;
     line-height: 1.5;
     font-weight: 700;
     margin-bottom: 16px;
