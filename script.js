@@ -3,6 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
   let totalSteps = 8; // Total number of steps (including all steps)
   let selectedIssue = ""; // To save the selection from the second step
 
+  let step1Answer = "";
+  let step2Answer = "";
+  let step3Answer = "";
+  let step4Answer = "";
+  let step5Answer = "";
+  let step6Answer = "";
+
   // All steps
   const steps = document.querySelectorAll(".content__step");
   const backButton = document.querySelector(".header__back");
@@ -41,10 +48,19 @@ document.addEventListener("DOMContentLoaded", function () {
       if (currentStep === totalSteps) {
         return;
       }
-
-      // If it's the second step, save the selection
-      if (currentStep === 2) {
+      if (currentStep === 1) {
+        step1Answer = this.textContent;
+      } else if (currentStep === 2) {
         selectedIssue = this.getAttribute("data-value");
+        step2Answer = this.textContent;
+      } else if (currentStep === 3) {
+        step3Answer = this.textContent;
+      } else if (currentStep === 4) {
+        step4Answer = this.textContent;
+      } else if (currentStep === 5) {
+        step5Answer = this.textContent;
+      } else if (currentStep === 6) {
+        step6Answer = this.textContent;
       }
 
       // If it's the fifth step, move to the sixth, according to the selection
@@ -93,6 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .querySelector(".content__step-last")
             .classList.remove("hidden");
         }, 3000); // 3000 ms = 3 seconds (it was 7000 ms = 7 seconds)
+        sendDataToGoogleSheets();
         currentStep = 8;
         updateProgress();
         return;
@@ -130,6 +147,35 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+
+  function sendDataToGoogleSheets() {
+    const data = {
+      step1: step1Answer,
+      step2: step2Answer,
+      step3: step3Answer,
+      step4: step4Answer,
+      step5: step5Answer,
+      step6: step6Answer,
+    };
+
+    fetch(
+      "https://script.google.com/macros/s/AKfycbyrKRW1nlbnrc3pchvGSFdR6LB--g9oECR6iWlcKrQ-ymvcye7H0pVIp0pn_Nork4eR/exec",
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Data sent successfully:", result);
+      })
+      .catch((error) => {
+        console.error("Error sending data:", error);
+      });
+  }
 
   const testimonialDates = document.querySelectorAll(
     ".content__offer-testimonials-dynamic"
