@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let step2Answer = "";
   let step3Answer = "";
   let step4Answer = "";
-  let step5Answer = "";
   let step6Answer = "";
 
   // All steps
@@ -49,18 +48,16 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
       if (currentStep === 1) {
-        step1Answer = this.textContent;
+        step1Answer = this.textContent.trim(); // Trim spaces
       } else if (currentStep === 2) {
         selectedIssue = this.getAttribute("data-value");
-        step2Answer = this.textContent;
+        step2Answer = this.textContent.trim(); // Trim spaces
       } else if (currentStep === 3) {
-        step3Answer = this.textContent;
+        step3Answer = this.textContent.trim(); // Trim spaces
       } else if (currentStep === 4) {
-        step4Answer = this.textContent;
-      } else if (currentStep === 5) {
-        step5Answer = this.textContent;
+        step4Answer = this.textContent.trim(); // Trim spaces
       } else if (currentStep === 6) {
-        step6Answer = this.textContent;
+        step6Answer = this.textContent.trim(); // Trim spaces
       }
 
       // If it's the fifth step, move to the sixth, according to the selection
@@ -149,19 +146,30 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   function sendDataToGoogleSheets() {
+    // Get today's date
+    const currentDate = new Date();
+    const formattedDate = `${String(currentDate.getDate()).padStart(
+      2,
+      "0"
+    )}.${String(currentDate.getMonth() + 1).padStart(
+      2,
+      "0"
+    )}.${currentDate.getFullYear()}`;
+
     const data = {
-      step1: step1Answer,
-      step2: step2Answer,
-      step3: step3Answer,
-      step4: step4Answer,
-      step5: step5Answer,
-      step6: step6Answer,
+      date: formattedDate,
+      step1: step1Answer.trim(), // Trim spaces
+      step2: step2Answer.trim(), // Trim spaces
+      step3: step3Answer.trim(), // Trim spaces
+      step4: step4Answer.trim(), // Trim spaces
+      step6: step6Answer.trim(), // Trim spaces
     };
 
     fetch(
-      "https://script.google.com/macros/s/AKfycbyrKRW1nlbnrc3pchvGSFdR6LB--g9oECR6iWlcKrQ-ymvcye7H0pVIp0pn_Nork4eR/exec",
+      "https://script.google.com/macros/s/AKfycbxp93g6oqukZiDS__a0DW04auAIx7FNTtOLw5jS6azBSzl1ZSOEJ75uICklAvvdmOXc/exec",
       {
         method: "POST",
+        mode: "no-cors",
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
@@ -176,7 +184,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.error("Error sending data:", error);
       });
   }
-
   const testimonialDates = document.querySelectorAll(
     ".content__offer-testimonials-dynamic"
   );
